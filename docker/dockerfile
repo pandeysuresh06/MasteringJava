@@ -1,0 +1,12 @@
+FROM openjdk:18
+LABEL Name="suresh pandey" 
+
+WORKDIR /var/app
+
+ADD CoreMethods-*.jar /var/app/CoreMethods.jar
+
+ENV JAVA_OPTS=""
+
+EXPOSE 8080
+
+CMD java $JAVA_OPTS -jar /var/app/CoreMethods.jar
