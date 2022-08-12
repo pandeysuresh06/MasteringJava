@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: masteringjava
+    kyma-grafana: enabled
+  name: masteringjava
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: masteringjava
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: masteringjava
+        kyma-grafana: enabled
+    spec:
+      containers:
+      - image: masteringjava
+        name: masteringjava
+        resources:
+      limits:
+        memory: 512Mi
+        cpu: "1"
+      requests:
+        memory: 256Mi
+        cpu: "0.2"
+        ports:
+          - containerPort: 8080
+
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  
+  labels:
+    app: masteringjava
+  name: masteringjava
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: masteringjava
+  type: ClusterIP
+status:
+  loadBalancer: {}
